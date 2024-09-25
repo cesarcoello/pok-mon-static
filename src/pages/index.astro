@@ -1,7 +1,15 @@
 ---
+//Codigo Server Side Only - Momento de Construccion BUILD TIME
+import type { PokemonListResponse } from "../interfaces/pokemon-list.response";
 import MainLayout from "../layouts/MainLayout.astro";
+
+const resp = await fetch("https://pokeapi.co/api/v2/pokemon");
+const data = (await resp.json()) as PokemonListResponse;
 ---
 
 <MainLayout title='Pokémon Static | Home'>
-  <h1 class='text-3xl'>Astro</h1>
+  <h1 class='text-3xl'>Listado de Pokémon</h1>
+  <ul>
+    {data.results.map((pokemon) => <li>{pokemon.name}</li>)}
+  </ul>
 </MainLayout>
